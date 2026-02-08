@@ -26,7 +26,27 @@ dropZone.addEventListener('drop', (e) => {
     e.preventDefault();
     dropZone.style.borderColor = 'rgba(255, 255, 255, 0.2)';
     dropZone.style.background = 'rgba(20, 20, 20, 0.5)';
-    handleFile(e.dataTransfer.files[0]);
+
+    // Check if dragging from Evidence Locker (has text/URL data)
+    const imageSrc = e.dataTransfer.getData("text");
+
+    if (imageSrc) {
+        // Evidence Locker drag - fetch as blob and convert to file
+        console.log("Fetching evidence:", imageSrc);
+        fetch(imageSrc)
+            .then(res => res.blob())
+            .then(blob => {
+                const file = new File([blob], "evidence_sample.jpg", { type: "image/jpeg" });
+                handleFile(file);
+            })
+            .catch(err => {
+                console.error("Error loading sample:", err);
+                alert('Failed to load evidence image');
+            });
+    } else {
+        // External file drag
+        handleFile(e.dataTransfer.files[0]);
+    }
 });
 
 function handleFile(file) {

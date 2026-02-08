@@ -95,37 +95,6 @@
     </div>
 
     <script src="{{ url_for('static', filename='script.js') }}"></script>
-    <script>
-        function allowDrop(ev) {
-            ev.preventDefault();
-        }
-
-        function drag(ev) {
-            // Use currentTarget to ensure we get the DIV data, not the IMG
-            ev.dataTransfer.setData("text", ev.currentTarget.dataset.src);
-        }
-
-        function drop(ev) {
-            ev.preventDefault();
-            var src = ev.dataTransfer.getData("text");
-            if (src) {
-                // Internal Drag
-                console.log("Fetching evidence:", src);
-                fetch(src)
-                    .then(res => res.blob())
-                    .then(blob => {
-                        const file = new File([blob], "evidence_sample.jpg", { type: "image/jpeg" });
-                        handleFile(file);
-                    })
-                    .catch(err => console.error("Error loading sample:", err));
-            } else {
-                // External Drag
-                if (ev.dataTransfer.files.length > 0) {
-                    handleFile(ev.dataTransfer.files[0]);
-                }
-            }
-        }
-    </script>
 </body>
 
 </html>
