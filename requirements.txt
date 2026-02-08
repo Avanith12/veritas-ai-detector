@@ -1,5 +1,5 @@
-flask
-gunicorn
-tensorflow-cpu
-pillow
-numpy
+gradio>=4.0.0
+tensorflow-cpu>=2.15.0
+keras>=3.0.0
+pillow>=10.0.0
+numpy>=1.24.0
