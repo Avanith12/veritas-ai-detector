@@ -13,7 +13,7 @@ pinned: false
 
 Detect if an image is **REAL** (photographed) or **FAKE** (AI-generated) using a Convolutional Neural Network.
 
-## 🚀 Live Demo
+## Live Demo
 
 **Try it now:** [https://huggingface.co/spaces/Avanith1/veritas-ai-detector](https://huggingface.co/spaces/Avanith1/veritas-ai-detector)
 
@@ -21,7 +21,7 @@ The app is currently hosted on **Hugging Face Spaces** with free persistent host
 
 ---
 
-## 📦 Two Versions Available
+## Two Versions Available
 
 This repository contains **two implementations** of VERITAS:
 
@@ -45,7 +45,7 @@ This repository contains **two implementations** of VERITAS:
 
 ---
 
-## 🤖 Model Details
+## Model Details
 
 - **Architecture:** CNN with 3 convolutional layers
 - **Training Data:** 60,000 images from CIFAKE dataset (30K real, 30K AI-generated)
@@ -55,7 +55,7 @@ This repository contains **two implementations** of VERITAS:
 
 ---
 
-## 🎯 How It Works
+## How It Works
 
 1. Upload an image or select an example
 2. The model preprocesses the image (resize to 32x32, normalize)
@@ -64,7 +64,7 @@ This repository contains **two implementations** of VERITAS:
 
 ---
 
-## ⚠️ Limitations
+## Limitations
 
 This model is trained on **low-resolution (32x32) images**. High-quality AI art from modern generators (Midjourney v6, DALL-E 3, Stable Diffusion) may be misclassified due to resolution downscaling.
 
@@ -72,7 +72,7 @@ This model is trained on **low-resolution (32x32) images**. High-quality AI art 
 
 ---
 
-## 🌐 Deployment Options
+## Deployment Options
 
 ### Option 1: Hugging Face Spaces (Current)
 - **URL:** [https://huggingface.co/spaces/Avanith1/veritas-ai-detector](https://huggingface.co/spaces/Avanith1/veritas-ai-detector)
@@ -103,7 +103,7 @@ python app.py
 
 ---
 
-## 📁 Repository Structure
+## Repository Structure
 
 ```
 veritas-ai-detector/
@@ -123,7 +123,7 @@ veritas-ai-detector/
 
 ---
 
-## 🛠️ Local Setup
+## Local Setup
 
 ### Requirements
 - Python 3.8+
@@ -148,7 +148,7 @@ python app.py
 
 ---
 
-## 📊 Performance
+## Performance
 
 - **Accuracy:** ~93% on validation set
 - **Prediction Time:** 
@@ -159,7 +159,7 @@ python app.py
 
 ---
 
-## 🙏 Credits
+## Credits
 
 - **Dataset:** [CIFAKE](https://www.kaggle.com/datasets/birdy654/cifake-real-and-ai-generated-synthetic-images) (60,000 images)
 - **Author:** Avanith Kanamarlapudi
@@ -168,7 +168,7 @@ python app.py
 
 ---
 
-## 📝 License
+## License
 
 MIT License - feel free to use for educational and research purposes.
 
