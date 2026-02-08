@@ -1,0 +1,7 @@
+Starting diagnostics...
+Diagnostics Script Running in: C:\Users\kanam\OneDrive\Desktop\projecttry\AI_Real_vs_Fake_Detector\web_app
+Base Directory: C:\Users\kanam\OneDrive\Desktop\projecttry\AI_Real_vs_Fake_Detector\web_app
+Target Model Path: C:\Users\kanam\OneDrive\Desktop\projecttry\AI_Real_vs_Fake_Detector\web_app\ai_detector_model.h5
+File exists! Size: 1912656 bytes
+Attempting with compile=False...
+SUCCESS: Model loaded correctly (Inference Mode)!

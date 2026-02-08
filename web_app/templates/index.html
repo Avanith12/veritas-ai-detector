@@ -1,0 +1,131 @@
+<!DOCTYPE html>
+<html lang="en">
+
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>VERITAS | AI FORENSICS</title>
+    <link rel="stylesheet" href="{{ url_for('static', filename='style.css') }}">
+    <link href="https://fonts.googleapis.com/css2?family=Share+Tech+Mono&display=swap" rel="stylesheet">
+</head>
+
+<body>
+    <div class="grid-container">
+        <!-- Sidebar: Mission Briefing & Evidence Locker -->
+        <aside class="sidebar">
+            <h2>MISSION BRIEFING</h2>
+            <div class="briefing-box">
+                <p><strong>SYSTEM:</strong> VERITAS v3.0</p>
+                <p><strong>DATASET:</strong> CIFAKE (32x32px)</p>
+                <p class="warning">LIMITATION WARNING:</p>
+                <p style="font-size: 0.8rem; opacity: 0.8;">
+                    This system is trained on low-resolution (32x32) images.
+                    High-quality AI art (Midjourney v6) may yield false positives due to downscaling loss.
+                </p>
+                <p><strong>INSTRUCTION:</strong> Use the EVIDENCE LOCKER below for calibrated testing.</p>
+            </div>
+
+            <h2>EVIDENCE LOCKER</h2>
+            <div class="evidence-grid">
+                {% for img in examples %}
+                <div class="evidence-item" draggable="true" ondragstart="drag(event)"
+                    data-src="{{ url_for('serve_example', filename=img) }}">
+                    <img src="{{ url_for('serve_example', filename=img) }}" alt="Evidence">
+                    <span
+                        class="evidence-label {% if 'real' in img.lower() %}label-real{% else %}label-fake{% endif %}">
+                        {% if 'real' in img.lower() %}REAL{% else %}FAKE{% endif %}
+                    </span>
+                </div>
+                {% endfor %}
+            </div>
+
+            <h2 style="margin-top: 20px;">SCAN LOGS</h2>
+            <ul id="history-list"></ul>
+        </aside>
+
+        <!-- Main Content -->
+        <main class="main-content">
+            <header>
+                <h1>VERITAS <span class="highlight">FORENSICS</span></h1>
+                <div class="status-indicator">SYSTEM: ONLINE</div>
+            </header>
+
+            <div class="scanner-interface">
+                <!-- Drop Zone -->
+                <div class="upload-area" id="drop-zone" ondrop="drop(event)" ondragover="allowDrop(event)">
+                    <div class="scanner-line"></div>
+                    <div class="icon">[INSERT DATA]</div>
+                    <h3>INITIATE SCAN</h3>
+                    <p class="subtext">DROP EVIDENCE FILE HERE</p>
+                    <input type="file" id="file-input" hidden accept="image/*">
+                </div>
+
+                <!-- Live Preview -->
+                <div class="preview-area" id="preview-area" style="display: none;">
+                    <img id="image-preview" src="" alt="Subject">
+                    <div class="overlay-grid"></div>
+                </div>
+            </div>
+
+            <!-- Results Dashboard -->
+            <div class="result-dashboard" id="result-area" style="display: none;">
+                <div class="gauge-container">
+                    <svg class="gauge" viewBox="0 0 100 50">
+                        <path class="gauge-bg" d="M10 50 A 40 40 0 0 1 90 50" />
+                        <path class="gauge-fill" id="gauge-fill" d="M10 50 A 40 40 0 0 1 10 50" />
+                    </svg>
+                    <div class="gauge-text" id="confidence-text">0%</div>
+                </div>
+
+                <div class="verdict-box">
+                    <h2 id="result-label">ANALYZING</h2>
+                    <p id="system-msg">PROCESSING NEURAL PATTERNS...</p>
+
+                    <!-- Neural View Debugger -->
+                    <div style="margin-top: 15px; border: 1px solid #333; padding: 10px; display: inline-block;">
+                        <p style="font-size: 0.8rem; margin: 0 0 5px 0; color: #666;">NEURAL VIEW (32x32)</p>
+                        <img id="neural-view" src=""
+                            style="width: 64px; height: 64px; image-rendering: pixelated; border: 1px solid #444;">
+                    </div>
+                </div>
+
+                <button id="reset-btn" class="btn-reset">SCAN NEXT SUBJECT</button>
+            </div>
+        </main>
+    </div>
+
+    <script src="{{ url_for('static', filename='script.js') }}"></script>
+    <script>
+        function allowDrop(ev) {
+            ev.preventDefault();
+        }
+
+        function drag(ev) {
+            // Use currentTarget to ensure we get the DIV data, not the IMG
+            ev.dataTransfer.setData("text", ev.currentTarget.dataset.src);
+        }
+
+        function drop(ev) {
+            ev.preventDefault();
+            var src = ev.dataTransfer.getData("text");
+            if (src) {
+                // Internal Drag
+                console.log("Fetching evidence:", src);
+                fetch(src)
+                    .then(res => res.blob())
+                    .then(blob => {
+                        const file = new File([blob], "evidence_sample.jpg", { type: "image/jpeg" });
+                        handleFile(file);
+                    })
+                    .catch(err => console.error("Error loading sample:", err));
+            } else {
+                // External Drag
+                if (ev.dataTransfer.files.length > 0) {
+                    handleFile(ev.dataTransfer.files[0]);
+                }
+            }
+        }
+    </script>
+</body>
+
+</html>

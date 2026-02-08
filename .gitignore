@@ -1,0 +1,11 @@
+__pycache__/
+*.pyc
+dataset/
+.DS_Store
+.env
+venv/
+lib/
+bin/
+include/
+*.ipynb_checkpoints
+web_app/uploads/*
