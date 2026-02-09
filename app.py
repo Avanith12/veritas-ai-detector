@@ -137,7 +137,9 @@ with gr.Blocks(css=custom_css, theme=gr.themes.Monochrome()) as demo:
             analysis_output = gr.Textbox(label="DETAILED ANALYSIS", lines=8, interactive=False)
     
     gr.Markdown("### EVIDENCE LOCKER - TEST SAMPLES")
-    gr.Examples(
+    
+    # Updated Examples for Gradio 5.x compatibility
+    examples = gr.Examples(
         examples=[
             [os.path.join("web_app", "test_examples", "real_sample_1.jpg")],
             [os.path.join("web_app", "test_examples", "fake_sample_1.jpg")],
@@ -145,7 +147,9 @@ with gr.Blocks(css=custom_css, theme=gr.themes.Monochrome()) as demo:
             [os.path.join("web_app", "test_examples", "fake_sample_3.jpg")],
         ],
         inputs=image_input,
-        label="Click a sample to test"
+        outputs=[verdict_output, analysis_output],
+        fn=classify_image,
+        cache_examples=False,
     )
     
     gr.Markdown("""
@@ -172,3 +176,4 @@ if __name__ == "__main__":
         server_port=7860,
         show_error=True
     )
+
