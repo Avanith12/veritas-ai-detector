@@ -157,6 +157,17 @@ python app.py
   - HF Spaces (GPU): ~0.2 seconds
 - **Memory Usage:** ~100-200 MB
 
+### Detailed Metrics
+
+#### Confusion Matrix
+![Confusion Matrix](training/training_results/confusion_matrix.png)
+
+#### Performance Metrics
+![Performance Metrics](training/training_results/performance.png)
+
+#### Sample Predictions
+![Sample Predictions](training/training_results/predictions.png)
+
 ---
 
 ## Credits
