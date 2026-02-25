@@ -87,7 +87,7 @@ This model is trained on **low-resolution (32x32) images**. High-quality AI art 
 - **URL:** [https://huggingface.co/spaces/Avanith1/veritas-ai-detector](https://huggingface.co/spaces/Avanith1/veritas-ai-detector)
 - **Pros:** Free, persistent, optional GPU, designed for ML apps
 - **Cons:** Simpler UI (Gradio)
-- **Status:** ✅ Live and working
+- **Status:**  Live and working
 
 ### Option 2: Render.com (Not Recommended)
 - **Status:** Attempted but not currently deployed
