@@ -13,22 +13,45 @@ sys.path.append(os.path.join(base_dir, 'web_app'))
 # Load Models Global Variables
 model_v1 = None
 model_v2 = None
+model_v2_status = "Not Initialized"
+
+# Keras 2/3 Compatibility Hack
+class FixedSCC(tf.keras.losses.SparseCategoricalCrossentropy):
+    def __init__(self, *args, **kwargs):
+        kwargs.pop('fn', None)
+        super().__init__(*args, **kwargs)
 
 def load_models():
-    global model_v1, model_v2
+    global model_v1, model_v2, model_v2_status
+    custom_objs = {'SparseCategoricalCrossentropy': FixedSCC}
     try:
         print("Loading V1 Model...")
-        model_v1 = tf.keras.models.load_model(os.path.join(base_dir, 'web_app', 'ai_detector_model.h5'))
+        model_v1 = tf.keras.models.load_model(
+            os.path.join(base_dir, 'web_app', 'ai_detector_model.h5'), 
+            compile=False, 
+            custom_objects=custom_objs
+        )
         print("V1 Loaded.")
         
         v2_path = os.path.join(base_dir, 'web_app', 'ai_detector_v2.h5')
         if os.path.exists(v2_path):
             print("Loading V2 Model...")
-            model_v2 = tf.keras.models.load_model(v2_path)
-            print("V2 Loaded.")
+            try:
+                model_v2 = tf.keras.models.load_model(
+                    v2_path, 
+                    compile=False, 
+                    custom_objects=custom_objs
+                )
+                model_v2_status = "Loaded Successfully"
+                print("V2 Loaded.")
+            except Exception as e_load:
+                model_v2_status = f"Load Failed: {str(e_load)}"
+                print(f"V2 Load Error: {e_load}")
         else:
-            print("V2 Model not found, skipping.")
+            model_v2_status = f"File Not Found at {v2_path}"
+            print(f"V2 Model not found at {v2_path}")
     except Exception as e:
+        model_v2_status = f"System Error: {str(e)}"
         print(f"Error loading models: {e}")
 
 # Load on startup
@@ -70,7 +93,7 @@ trained on CIFAKE (60k images)"""
         else:
             # V2 Logic (224x224, EfficientNet)
             if model_v2 is None:
-                return "ERROR", "V2 Model file missing."
+                return "ERROR", f"V2 STATUS: {model_v2_status}"
                 
             target_size = (224, 224)
             img = image.resize(target_size)
@@ -131,7 +154,7 @@ with gr.Blocks(css=custom_css, theme=gr.themes.Monochrome()) as demo:
         with gr.Column():
             verdict_output = gr.Textbox(label="VERDICT", lines=1)
             analysis_output = gr.Textbox(label="DETAILED ANALYSIS", lines=6)
-    
+            
     gr.Markdown("### EVIDENCE LOCKER - EXAMPLES")
     
     # V1 Examples (Visible only when V1 selected)
@@ -186,4 +209,4 @@ with gr.Blocks(css=custom_css, theme=gr.themes.Monochrome()) as demo:
     image_input.change(predict, inputs=[image_input, model_selector], outputs=[verdict_output, analysis_output])
 
 if __name__ == "__main__":
-    demo.launch(server_name="0.0.0.0", server_port=7861)
+    demo.launch(server_name="0.0.0.0", server_port=7860)

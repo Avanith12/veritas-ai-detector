@@ -11,11 +11,20 @@ pinned: false
 
 # VERITAS - AI Image Forensics
 
-Detect if an image is **REAL** (photographed) or **FAKE** (AI-generated) using a Convolutional Neural Network.
+**Live Site:** [Hugging Face Space](https://huggingface.co/spaces/Avanith1/veritas-ai-detector) 🚀
 
-## Live Demo
+## 🛡️ V2 Upgrade: Dual-Model Forensics
+VERITAS has been upgraded to a dual-model system, allowing for cross-verification of AI-generated content.
 
-**Try it now:** [https://huggingface.co/spaces/Avanith1/veritas-ai-detector](https://huggingface.co/spaces/Avanith1/veritas-ai-detector)
+### V1 (Fast/Low-Res)
+- **Resolution:** 32x32 pixels
+- **Model:** Custom CNN
+- **Best For:** Speed and legacy AI artifacts.
+
+### V2 (Accurate/High-Res)
+- **Resolution:** 224x224 pixels
+- **Model:** EfficientNetB0 (Transfer Learning)
+- **Best For:** Modern high-fidelity AI generators (Midjourney, DALL-E 3).
 
 The app is currently hosted on **Hugging Face Spaces** with free persistent hosting and optional GPU acceleration.
 
