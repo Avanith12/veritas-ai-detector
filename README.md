@@ -11,6 +11,8 @@ pinned: false
 
 # VERITAS - AI Image Forensics
 
+![Project Banner](assets/readme.png)
+
 **Live Site:** [Hugging Face Space](https://huggingface.co/spaces/Avanith1/veritas-ai-detector) 
 
 ##  V2 Upgrade: Dual-Model Forensics
