@@ -38,7 +38,7 @@ This repository contains **two implementations** of VERITAS:
 - **File:** `app.py`
 - **UI:** Cyberpunk terminal theme with green monospace text
 - **Deployment:** Hugging Face Spaces
-- **Status:** ✅ **Currently Live**
+- **Status:**  **Currently Live**
 - **Pros:** Simple interface, free hosting, optional GPU
 - **Run locally:** `python app.py` (requires `gradio`)
 
