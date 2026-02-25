@@ -13,7 +13,7 @@ pinned: false
 
 **Live Site:** [Hugging Face Space](https://huggingface.co/spaces/Avanith1/veritas-ai-detector) 
 
-## 🛡️ V2 Upgrade: Dual-Model Forensics
+##  V2 Upgrade: Dual-Model Forensics
 VERITAS has been upgraded to a dual-model system, allowing for cross-verification of AI-generated content.
 
 ### V1 (Fast/Low-Res)
